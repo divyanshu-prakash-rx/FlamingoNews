@@ -1,0 +1,58 @@
+{
+    "status": "ok",
+    "totalResults": 4,
+    "articles": [
+        {
+            "source": {
+                "id": null,
+                "name": "Deadline"
+            },
+            "author": "Anthony D'Alessandro",
+            "title": "Amazon MGM Studios Senior Production & Development Executive Sandino Moya-Smith Exits - Deadline",
+            "description": "EXCLUSIVE: We understand that Amazon Studios MGM Senior Production & Development Executive Sandino Moya-Smith was unfortunately part of the cuts made by the streaming/theatrical studio this mor…",
+            "url": "http://deadline.com/2024/01/amazon-mgm-sandino-moya-smith-1235712104/",
+            "urlToImage": "https://deadline.com/wp-content/uploads/2023/10/Amazon-MGM-Studios-Logo-1.jpg?w=1024",
+            "publishedAt": "2024-01-10T22:18:00Z",
+            "content": "EXCLUSIVE: We understand that Amazon Studios MGM Senior Production &amp; Development Executive Sandino Moya-Smith was unfortunately part of the cuts made by the streaming/theatrical studio this morni… [+1859 chars]"
+        },
+        {
+            "source": {
+                "id": "associated-press",
+                "name": "Associated Press"
+            },
+            "author": "SCOTT SONNER, STEFANIE DAZIO",
+            "title": "California avalanche: 1 dead, 3 injured at ski resort near Lake Tahoe - The Associated Press",
+            "description": "An avalanche has roared through a section of expert trails at a California ski resort near Lake Tahoe. It killed one person and left three others with minor injuries. The avalanche prompted Palisades Tahoe to close 30 minutes after it opened Wednesday. Search…",
+            "url": "https://apnews.com/article/avalanche-california-ski-resort-482ec822c87a9ed5829001f8ac887a3b",
+            "urlToImage": "https://dims.apnews.com/dims4/default/3ef4225/2147483647/strip/true/crop/2000x1125+0+109/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F24%2F49%2F4404a5b091005f5433e0e8fc7519%2F17bdd2b2b46249f3acd6e6a773f8c2b9",
+            "publishedAt": "2024-01-11T02:57:00Z",
+            "content": "RENO, Nev. (AP) An avalanche roared through a section of expert trails at a California ski resort near Lake Tahoe on Wednesday, sweeping up four people and killing one, as a major storm with snow and… [+3287 chars]"
+        },
+        {
+            "source": {
+                "id": "cnn",
+                "name": "CNN"
+            },
+            "author": "Oliver Darcy",
+            "title": "Aaron Rodgers is off ESPN’s ‘Pat McAfee Show’ for the season after ugly remarks about Jimmy Kimmel, conspiracy theories - CNN",
+            "description": "Aaron Rodgers is done as a guest on Pat McAfee’s ESPN show for the remainder of the NFL season.",
+            "url": "https://www.cnn.com/2024/01/10/business/aaron-rodgers-pat-mcafee-show/index.html",
+            "urlToImage": "https://media.cnn.com/api/v1/images/stellar/prod/240110124353-aaron-rodgers-011024.jpg?c=16x9&q=w_800,c_fill",
+            "publishedAt": "2024-01-11T02:50:00Z",
+            "content": "Aaron Rodgers is done as a guest on Pat McAfees ESPN show for the remainder of the NFL season.\r\nMcAfee, who has drawn significant scrutiny for allowing the injured New York Jets quarterback to appear… [+3631 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "CBS Sports"
+            },
+            "author": "",
+            "title": "Nick Saban retires: Seven-time national championship-winning coach, 72, exits Alabama after 17 seasons - CBS Sports",
+            "description": "Saban is widely considered to be the greatest college football coach of all time",
+            "url": "https://www.cbssports.com/college-football/news/nick-saban-retires-seven-time-national-championship-winning-coach-72-exits-alabama-after-17-seasons/",
+            "urlToImage": "https://sportshub.cbsistatic.com/i/r/2022/12/30/8c92dcd0-2c57-46bd-a03b-1490814d1283/thumbnail/1200x675/1fa226c865362ecc97346202bd7b4b5e/usatsi-nick-saban-alabama.jpg",
+            "publishedAt": "2024-01-11T02:35:00Z",
+            "content": "Alabama coach Nick Saban, 72, has decided to retire, ending a run that ranks among the greatest in college football history, the school announced on Wednesday. The seven-time national championship-wi… [+10297 chars]"
+        }
+    ]
+}
