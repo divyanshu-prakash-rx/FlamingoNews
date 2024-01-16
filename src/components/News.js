@@ -3,9 +3,7 @@ import NewsItem from './NewsItem'
 import Loading from './Loading'
 
 export default class News extends Component {
-    articles = [
-
-    ]
+    articles = [ ]
     constructor() {
         super()
         this.state = {
