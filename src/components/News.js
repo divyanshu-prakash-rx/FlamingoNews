@@ -15,27 +15,40 @@ export default class News extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    console.log("componentDidMount triggered...");
     this.fetchNews();
-  }
-  fetchNews = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=4405a6996dd84a05b17871799271ffb1&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+}
+
+fetchNews = async () => {
+    const url = `https://mocki.io/v1/908c994f-b261-43d3-bfd7-cafe9f0daf56`;
+    console.log("Fetching news from:", url);
+
     this.setState({ loading: true });
     try {
-      let data = await fetch(url);
-      let parsedData = await data.json();
-      if (parsedData.articles) {
-        this.setState({
-          articles: parsedData.articles,
-          totalResults: parsedData.totalResults,
-          loading: false,
-        });
-      }
+        let response = await fetch(url);
+        if (!response.ok) { 
+            throw new Error("Network response was not ok");
+        }
+        let parsedData = await response.json();
+        console.log("Parsed Data:", parsedData); 
+
+        if (parsedData.articles) {
+            this.setState({
+                articles: parsedData.articles,
+                totalResults: parsedData.totalResults,
+                loading: false,
+            });
+        } else {
+            console.error("No articles found in the response data");
+            this.setState({ loading: false });
+        }
     } catch (error) {
-      console.error("Error fetching news:", error);
-      this.setState({ loading: false });
+        console.error("Error fetching news:", error);
+        this.setState({ loading: false });
     }
-  };
+};
+
 
   handleNextClick = async () => {
     if (this.state.page + 1 <= Math.ceil(this.state.totalResults / this.props.pageSize)) {
