@@ -15,8 +15,8 @@ export default class News extends Component {
     }
 
     async componentDidMount() {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=c647dad12d3f4a21a2f4d9836fbf7df5&page=1&pageSize=${this.props.pageSize}`;
-        // let url = "https://mocki.io/v1/22f4e1b3-6ca9-4699-b7ef-07072b5a0528";
+        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=4405a6996dd84a05b17871799271ffb1&page=1&pageSize=${this.props.pageSize}`;
+
         this.setState({ loading: true })
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -26,8 +26,8 @@ export default class News extends Component {
     handleNextClick = async () => {
         console.log("Next")
         if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize))) {
-            let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=c647dad12d3f4a21a2f4d9836fbf7df5&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
-            // let url = "https://mocki.io/v1/22f4e1b3-6ca9-4699-b7ef-07072b5a0528";
+            let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=4405a6996dd84a05b17871799271ffb1&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+    
             this.setState({ loading: true })
             let data = await fetch(url);
             let parsedData = await data.json();
@@ -40,8 +40,8 @@ export default class News extends Component {
         }
     }
     handlePrevClick = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=c647dad12d3f4a21a2f4d9836fbf7df5&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
-        // let url = "https://mocki.io/v1/22f4e1b3-6ca9-4699-b7ef-07072b5a0528";
+        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=4405a6996dd84a05b17871799271ffb1&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+
         this.setState({ loading: true })
         let data = await fetch(url);
         let parsedData = await data.json();
