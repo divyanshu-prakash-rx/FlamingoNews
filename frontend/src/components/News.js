@@ -20,6 +20,7 @@ export default class News extends Component {
 
   fetchNews = async () => {
     // const url = `http://localhost:5000/api/news/latest`;
+       const url = `https://flamingonews-backed.onrender.com/api/news/latest`;
 
     this.setState({ loading: true });
     try {
