@@ -1,117 +1,99 @@
-import React, { Component } from 'react';
-import NewsItem from './NewsItem';
-import Loading from './Loading';
+import React, { useEffect, useState } from "react";
+import NewsItem from "./NewsItem";
 
-export default class News extends Component {
-  constructor() {
-    super();
-    this.state = {
-      articles: [],
-      loading: false,
-      page: 1,
-      totalResults: 0,
-      pageSize: 10,
-    };
-  }
+const categories = [
+  "top","business", "crime", "domestic", "education", "entertainment", "environment",
+  "food", "health", "lifestyle", "other", "politics", "science",
+  "sports", "technology", "tourism", "world"
+];
 
-  componentDidMount() {
-    this.fetchNews();
-  }
+const API_KEY = "pub_8140526b74857bc8aeafa0102f3e3746ede92";
 
-  fetchNews = async () => {
-    // const url = `http://localhost:5000/api/news/latest`;
-       const url = `https://flamingonews-backed.onrender.com/api/news/latest`;
+export default function News() {
+  const [articles, setArticles] = useState([]);
+  const [category, setCategory] = useState("top");
+  const [nextPage, setNextPage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    this.setState({ loading: true });
+  const fetchNews = async (selectedCategory = category, page = null) => {
+    setLoading(true);
     try {
-      let response = await fetch(url);
-      if (!response.ok) throw new Error('Network response was not ok');
-      let newsData = await response.json();
-
-      this.setState({
-        articles: newsData,
-        totalResults: newsData.length,
-        loading: false,
-      });
+      let url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&language=en&category=${selectedCategory}`;
+      if (page) url += `&page=${page}`;
+  
+      const res = await fetch(url);
+      const data = await res.json();
+  
+      if (data.status === "success") {
+        setArticles(data.results);  
+        setNextPage(data.nextPage || null);
+      } else {
+        console.error("API error:", data.results?.message || "Unknown error");
+        setArticles([]);
+        setNextPage(null);
+      }
     } catch (error) {
-      console.error('Error fetching news:', error);
-      this.setState({ loading: false });
+      console.error("Fetch error:", error);
     }
+    setLoading(false);
   };
+  
+const handleNextPage = () => {
+  if (nextPage) {
+    fetchNews(category, nextPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
 
-  handleNextClick = () => {
-    if (this.state.page + 1 <= Math.ceil(this.state.totalResults / this.state.pageSize)) {
-      this.setState({ page: this.state.page + 1 }, () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-  };
+  useEffect(() => {
+    fetchNews(category);
+  }, [category]);
 
-  handlePrevClick = () => {
-    if (this.state.page > 1) {
-      this.setState({ page: this.state.page - 1 }, () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-  };
 
-  getPagedArticles = () => {
-    const { page, pageSize, articles } = this.state;
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = page * pageSize;
-    return articles.slice(startIndex, endIndex);
-  };
 
-  render() {
-    const { loading, page, totalResults, pageSize } = this.state;
-    const articlesForCurrentPage = this.getPagedArticles();
+  return (
+    <div className="container my-4">
+      <h2 className="text-center mb-4 " style={
+        { color: "white", fontSize: "2rem", fontWeight: "bold" }
+      }> {category.charAt(0).toUpperCase() + category.slice(1)} Headlines</h2>
 
-    return (
-      <div className="container my-3" style={{ color: 'wheat' }}>
-        <h1 className="text-center">Today's Headlines</h1>
-        <hr style={{ border: '1px solid wheat', opacity: '100%' }} />
-        {loading ? (
-          <Loading />
-        ) : (
-          <div className="row">
-            {articlesForCurrentPage && articlesForCurrentPage.length > 0 ? (
-              articlesForCurrentPage.map((element) => (
-                <div className="col-md-4 d-flex justify-content-center" key={element.url}>
-                  <NewsItem
-                    title={element.title}
-                    description={element.description}
-                    imageUrl={
-                      element.image!=="None"
-                        ? element.image
-                        : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKq5qhLJDxPYGGpvRQhaDe13d11B2vXicq7g&usqp=CAU'
-                    }
-                    newsUrl={element.url}
-                  />
-                </div>
-              ))
-            ) : (
-              <p>No articles found</p>
-            )}
-          </div>
-        )}
-        <hr style={{ border: '1px solid wheat', opacity: '100%' }} />
-        <div className="container d-flex justify-content-between">
+      <div className="d-flex flex-wrap gap-2 justify-content-center mb-4">
+        {categories.map((cat) => (
           <button
-            disabled={page <= 1}
-            className="btn btn-primary m-3"
-            onClick={this.handlePrevClick}
+            key={cat}
+            className={`btn btn-sm ${cat === category ? "btn-primary" : "btn-outline-primary"}`}
+            onClick={() => {
+              setCategory(cat);
+              setNextPage(null);
+            }}
           >
-            &larr; Previous Page
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
           </button>
-          <button
-            disabled={page * pageSize >= totalResults}
-            className="btn btn-primary m-3"
-            onClick={this.handleNextClick}
-          >
-            Next Page &rarr;
+        ))}
+      </div>
+
+      {loading && <p className="text-center">Loading...</p>}
+
+      <div className="row">
+        {articles.map((article, index) => (
+          <div className="col-md-4" key={article.article_id || index}>
+            <NewsItem
+              title={article.title}
+              description={article.description}
+              imageUrl={article.image_url}
+              newsUrl={article.link}
+            />
+          </div>
+        ))}
+      </div>
+
+      {nextPage && !loading && (
+        <div className="text-center mt-4">
+          <button className="btn btn-dark" onClick={handleNextPage}>
+            Next Page
           </button>
         </div>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
